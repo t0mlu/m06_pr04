@@ -5,5 +5,13 @@
 @endsection
 
 @section('content')
-<p>{{$ticket->title}}</p>
+<table>
+    @foreach ($ticket->getAttributes() as $key => $value)
+    <tr>
+        <td><strong>{{ ucfirst($key) }}:</strong></td>
+        <td>{{ $value }}</td>
+    </tr>
+    @endforeach
+    <img src="{{ Storage::url($ticket->screenshot) }}">
+</table>
 @endsection

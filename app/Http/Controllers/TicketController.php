@@ -26,8 +26,17 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        Ticket::create($request->all());
-        $request->file('screenshot')->store('storage');
+        Ticket::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'screenshot' => $request->file('screenshot')->getClientOriginalName(),
+            'creator' => $request->creator,
+            'priority' => $request->priority
+        ]);
+
+        $aux = $request->file('screenshot')->getClientOriginalName();
+        $request->file('screenshot')->storeAs('public', $aux);
+
         return redirect()->route('tickets.index');
     }
 
