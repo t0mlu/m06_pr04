@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('tickets.store') }}" method="POST">
+<form action="{{ route('tickets.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
         Title: <input type="text" name="title"/>
@@ -14,7 +14,7 @@
         Description: <textarea name="description"></textarea>
     </div>
     <div>
-        File: <input type="file" name="screenshot" accept="image/png, image/jpeg"/>
+        File: <input type="file" name="screenshot"/>
     </div>
     <div>
         Creator: <input type="text" name="creator"/>
@@ -27,7 +27,7 @@
         </select>
     </div>
     <div>
-        <input type="submit"/>
+        <input type="submit" name="submit"/>
     </div>
 </form>
 @endsection
