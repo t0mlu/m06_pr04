@@ -15,7 +15,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::all();
+        return view('tickets.index', compact('tickets'));
     }
 
     /**
@@ -25,7 +26,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $aux = new Ticket();
+        $fillable = $aux->getFillable();
+        return view('tickets.create', compact('fillable'));
     }
 
     /**
@@ -36,7 +39,10 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        //
+        Ticket::create($request->all());
+        $path = $request->file('screenshot')->store();
+        return $path;
+        // return redirect()->route('tickets.index');
     }
 
     /**
