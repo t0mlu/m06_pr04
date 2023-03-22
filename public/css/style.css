@@ -70,5 +70,10 @@ body {
 }
 
 .ticket-show-img {
-    max-width: 50vw;
+    max-width: 45vw;
+}
+
+.recaptcha-container {
+    padding: 1rem;
+    margin: 1rem 0;
 }

@@ -15,7 +15,11 @@
             </tr>
         @endforeach
         </table>
-        <a href="{{ route('tickets.edit', $ticket) }}">Edit</a>
+        <br>
+        <div>
+            <a href="{{ route('tickets.edit', $ticket) }}">Edit</a>
+        </div>
+        <br>
         <form method="POST">
             @csrf
             @method('DELETE')
