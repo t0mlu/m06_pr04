@@ -1,15 +1,11 @@
 @extends('tickets.layout')
 
 @section('header')
-<h1>Tickets</h1>
+<h1>All tickets</h1>
 @endsection
 
 @section('content')
-<form>
-    @csrf
-    <button type="submit" formaction="{{ route('tickets.create') }}">Create a ticket</button>
-</form>
-<table>
+<table class="tickets-index-table">
     <tr>
         <th></th>
         <th></th>
@@ -23,16 +19,10 @@
     @foreach ($tickets as $ticket)
     <tr>
         <td>
-            <form method="GET">
-                @csrf
-                <button type="submit" formaction="{{ route('tickets.show', $ticket) }}">Details</button>
-            </form>
+            <a href="{{ route('tickets.show', $ticket) }}">Details</a>
         </td>
         <td>
-            <form method="GET">
-                @csrf
-                <button type="submit" formaction="{{ route('tickets.edit', $ticket) }}">Edit</button>
-            </form>
+            <a href="{{ route('tickets.edit', $ticket) }}">Edit</a>
         </td>
         <td>
             <form method="POST">

@@ -35,7 +35,6 @@ class TicketController extends Controller
         ]);
 
         $request->file('screenshot')->storeAs('public', $request->file('screenshot')->getClientOriginalName());
-
         return redirect()->route('tickets.show', $ticket);
     }
 

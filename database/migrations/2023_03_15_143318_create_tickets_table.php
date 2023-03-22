@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('screenshot');
             $table->string('creator');
             $table->enum('priority', ['high', 'mid', 'low']);
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
