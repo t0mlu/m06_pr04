@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+<form>
+    @csrf
+    <button type="submit" formaction="{{ route('tickets.create') }}">Create a ticket</button>
+</form>
 <table>
     <tr>
         <th></th>
@@ -19,13 +23,23 @@
     @foreach ($tickets as $ticket)
     <tr>
         <td>
-            <a href="{{ route('tickets.show', $ticket) }}">details</a>
+            <form method="GET">
+                @csrf
+                <button type="submit" formaction="{{ route('tickets.show', $ticket) }}">Details</button>
+            </form>
         </td>
         <td>
-            <a href="{{ route('tickets.edit', $ticket) }}">edit</a>
+            <form method="GET">
+                @csrf
+                <button type="submit" formaction="{{ route('tickets.edit', $ticket) }}">Edit</button>
+            </form>
         </td>
         <td>
-            <a href="{{ route('tickets.destroy', $ticket) }}">delete</a>
+            <form method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" formaction="{{ route('tickets.destroy', $ticket) }}">Delete</button>
+            </form>
         </td>
         <td>{{ $ticket->id }}</td>
         <td>{{ $ticket->title }}</td>

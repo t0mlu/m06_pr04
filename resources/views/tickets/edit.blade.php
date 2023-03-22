@@ -1,5 +1,7 @@
 @extends('tickets.layout')
 
+{!! NoCaptcha::renderJs() !!}
+
 @section('header')
 <h1>Ticket editing</h1>
 @endsection
@@ -30,5 +32,12 @@
     <div>
         <input type="submit" name="submit"/>
     </div>
+    {!! NoCaptcha::display() !!}
+    @if ($errors->has('g-recaptcha-response'))
+    <span>
+        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+    </span>
+@endif
 </form>
+<img src="{{ Storage::url($ticket->screenshot) }}">
 @endsection

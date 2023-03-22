@@ -26,7 +26,7 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        Ticket::create([
+        $ticket = Ticket::create([
             'title' => $request->title,
             'description' => $request->description,
             'screenshot' => $request->file('screenshot')->getClientOriginalName(),
@@ -34,10 +34,9 @@ class TicketController extends Controller
             'priority' => $request->priority
         ]);
 
-        $aux = $request->file('screenshot')->getClientOriginalName();
-        $request->file('screenshot')->storeAs('public', $aux);
+        $request->file('screenshot')->storeAs('public', $request->file('screenshot')->getClientOriginalName());
 
-        return redirect()->route('tickets.index');
+        return redirect()->route('tickets.show', $ticket);
     }
 
 
@@ -55,8 +54,25 @@ class TicketController extends Controller
 
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $ticket->update(array_filter($request->all()));
-        return redirect()->route('tickets.index');
+        $request->validate([
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
+
+        $ticket->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'creator' => $request->creator,
+            'priority' => $request->priority
+        ]);
+
+        if ($request->hasFile('screenshot')) {
+            $ticket->update([
+                'screenshot' => $request->file('screenshot')->getClientOriginalName()
+            ]);
+            $request->file('screenshot')->storeAs('public', $request->file('screenshot')->getClientOriginalName());
+        }
+
+        return redirect()->route('tickets.show', $ticket);
     }
 
 

@@ -12,6 +12,15 @@
         <td>{{ $value }}</td>
     </tr>
     @endforeach
-    <img src="{{ Storage::url($ticket->screenshot) }}">
 </table>
+<form method="GET">
+        @csrf
+        <button type="submit" formaction="{{ route('tickets.edit', $ticket) }}">Edit</button>
+    </form>
+    <form method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" formaction="{{ route('tickets.destroy', $ticket) }}">Delete</button>
+    </form>
+<img src="{{ Storage::url($ticket->screenshot) }}">
 @endsection
