@@ -55,8 +55,8 @@ class TicketController extends Controller
 
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $country->update(array_filter($request->all()));
-        return redirect()->route('countries.index');
+        $ticket->update(array_filter($request->all()));
+        return redirect()->route('tickets.index');
     }
 
 
