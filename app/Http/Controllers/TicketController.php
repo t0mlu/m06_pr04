@@ -11,7 +11,7 @@ class TicketController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::orderBy('created_at', 'DESC')->get();
         return view('tickets.index', compact('tickets'));
     }
 
